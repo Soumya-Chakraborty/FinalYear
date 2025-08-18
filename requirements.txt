@@ -1,0 +1,48 @@
+# Core scientific computing
+numpy>=1.21.0
+scipy>=1.7.0
+
+# Audio processing
+librosa>=0.9.0
+soundfile>=0.10.0
+audioread>=2.1.9
+
+# Pitch extraction (Praat integration)
+praat-parselmouth>=0.4.0
+
+# Machine learning and HMM
+scikit-learn>=1.0.0
+joblib>=1.1.0
+
+# CLI interface
+typer>=0.6.0
+click>=8.0.0
+rich>=12.0.0
+
+# Data handling and validation
+pydantic>=1.9.0
+jsonschema>=4.0.0
+
+# Testing
+pytest>=7.0.0
+pytest-cov>=3.0.0
+pytest-mock>=3.7.0
+
+# Development tools
+black>=22.0.0
+flake8>=4.0.0
+mypy>=0.950
+
+# Documentation
+sphinx>=4.5.0
+sphinx-rtd-theme>=1.0.0
+
+# Optional: Jupyter for analysis
+jupyter>=1.0.0
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# Configuration and utilities
+pyyaml>=6.0
+tqdm>=4.64.0
+pathlib2>=2.3.0; python_version < "3.4"

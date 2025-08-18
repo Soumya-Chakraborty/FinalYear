@@ -1,0 +1,10 @@
+{
+  "recording_id": "bihag_song1",
+  "raag": "Bihag",
+  "tonic_hz": 261.63,
+  "artist": "Artist Name",
+  "instrument": "sitar",
+  "split": "train",
+  "duration": 180.5,
+  "notes": "Optional notes about the recording"
+}

@@ -1,0 +1,257 @@
+{
+  "summary": {
+    "total_samples": 90,
+    "n_classes": 5,
+    "overall_accuracy": 0.7444444444444445,
+    "balanced_accuracy": 0.7137777777777778
+  },
+  "confusion_matrix": {
+    "matrix": [
+      [
+        22,
+        1,
+        0,
+        1,
+        1
+      ],
+      [
+        2,
+        16,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        13,
+        2,
+        3
+      ],
+      [
+        2,
+        1,
+        1,
+        10,
+        1
+      ],
+      [
+        2,
+        0,
+        2,
+        2,
+        6
+      ]
+    ],
+    "class_names": [
+      "bihag",
+      "darbari",
+      "desh",
+      "gaud_malhar",
+      "yaman"
+    ]
+  },
+  "detailed_analysis": {
+    "matrix_shape": [
+      5,
+      5
+    ],
+    "total_samples": 90,
+    "n_classes": 5,
+    "class_names": [
+      "bihag",
+      "darbari",
+      "desh",
+      "gaud_malhar",
+      "yaman"
+    ],
+    "per_class_stats": {
+      "bihag": {
+        "true_positives": 22,
+        "false_positives": 6,
+        "false_negatives": 3,
+        "true_negatives": 59,
+        "support": 25,
+        "precision": 0.7857142857142857,
+        "recall": 0.88,
+        "f1_score": 0.830188679245283
+      },
+      "darbari": {
+        "true_positives": 16,
+        "false_positives": 2,
+        "false_negatives": 4,
+        "true_negatives": 68,
+        "support": 20,
+        "precision": 0.8888888888888888,
+        "recall": 0.8,
+        "f1_score": 0.8421052631578948
+      },
+      "desh": {
+        "true_positives": 13,
+        "false_positives": 4,
+        "false_negatives": 5,
+        "true_negatives": 68,
+        "support": 18,
+        "precision": 0.7647058823529411,
+        "recall": 0.7222222222222222,
+        "f1_score": 0.7428571428571428
+      },
+      "gaud_malhar": {
+        "true_positives": 10,
+        "false_positives": 6,
+        "false_negatives": 5,
+        "true_negatives": 69,
+        "support": 15,
+        "precision": 0.625,
+        "recall": 0.6666666666666666,
+        "f1_score": 0.6451612903225806
+      },
+      "yaman": {
+        "true_positives": 6,
+        "false_positives": 5,
+        "false_negatives": 6,
+        "true_negatives": 73,
+        "support": 12,
+        "precision": 0.5454545454545454,
+        "recall": 0.5,
+        "f1_score": 0.5217391304347826
+      }
+    },
+    "overall_stats": {
+      "accuracy": 0.7444444444444445,
+      "macro_precision": 0.7219527204821322,
+      "macro_recall": 0.7137777777777778,
+      "macro_f1": 0.7164103012035368,
+      "weighted_precision": 0.7456199483160268,
+      "weighted_recall": 0.7444444444444445,
+      "weighted_f1": 0.7434059970641625
+    },
+    "error_analysis": {
+      "most_confused_pairs": [
+        {
+          "true_class": "desh",
+          "predicted_class": "yaman",
+          "count": 3,
+          "confusion_rate": 0.16666666666666666
+        },
+        {
+          "true_class": "yaman",
+          "predicted_class": "bihag",
+          "count": 2,
+          "confusion_rate": 0.16666666666666666
+        },
+        {
+          "true_class": "yaman",
+          "predicted_class": "desh",
+          "count": 2,
+          "confusion_rate": 0.16666666666666666
+        },
+        {
+          "true_class": "yaman",
+          "predicted_class": "gaud_malhar",
+          "count": 2,
+          "confusion_rate": 0.16666666666666666
+        },
+        {
+          "true_class": "gaud_malhar",
+          "predicted_class": "bihag",
+          "count": 2,
+          "confusion_rate": 0.13333333333333333
+        },
+        {
+          "true_class": "desh",
+          "predicted_class": "gaud_malhar",
+          "count": 2,
+          "confusion_rate": 0.1111111111111111
+        },
+        {
+          "true_class": "darbari",
+          "predicted_class": "bihag",
+          "count": 2,
+          "confusion_rate": 0.1
+        },
+        {
+          "true_class": "gaud_malhar",
+          "predicted_class": "darbari",
+          "count": 1,
+          "confusion_rate": 0.06666666666666667
+        },
+        {
+          "true_class": "gaud_malhar",
+          "predicted_class": "desh",
+          "count": 1,
+          "confusion_rate": 0.06666666666666667
+        },
+        {
+          "true_class": "gaud_malhar",
+          "predicted_class": "yaman",
+          "count": 1,
+          "confusion_rate": 0.06666666666666667
+        }
+      ],
+      "most_accurate_classes": [
+        {
+          "class": "bihag",
+          "accuracy": 0.88,
+          "support": 25
+        },
+        {
+          "class": "darbari",
+          "accuracy": 0.8,
+          "support": 20
+        },
+        {
+          "class": "desh",
+          "accuracy": 0.7222222222222222,
+          "support": 18
+        }
+      ],
+      "least_accurate_classes": [
+        {
+          "class": "desh",
+          "accuracy": 0.7222222222222222,
+          "support": 18
+        },
+        {
+          "class": "gaud_malhar",
+          "accuracy": 0.6666666666666666,
+          "support": 15
+        },
+        {
+          "class": "yaman",
+          "accuracy": 0.5,
+          "support": 12
+        }
+      ],
+      "class_confusion_rates": {
+        "bihag": 0.12,
+        "darbari": 0.2,
+        "desh": 0.2777777777777778,
+        "gaud_malhar": 0.3333333333333333,
+        "yaman": 0.5
+      }
+    }
+  },
+  "comprehensive_metrics": {
+    "overall_accuracy": 0.7444444444444445,
+    "per_class_accuracy": {
+      "bihag": 0.88,
+      "darbari": 0.8,
+      "desh": 0.7222222222222222,
+      "gaud_malhar": 0.6666666666666666,
+      "yaman": 0.5
+    },
+    "balanced_accuracy": 0.7137777777777778,
+    "class_support": {
+      "bihag": 25,
+      "darbari": 20,
+      "desh": 18,
+      "gaud_malhar": 15,
+      "yaman": 12
+    },
+    "total_samples": 90,
+    "num_classes": 5,
+    "top_k_accuracies": {},
+    "confidence_statistics": {}
+  }
+}
