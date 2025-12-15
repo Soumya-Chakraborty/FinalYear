@@ -1,43 +1,58 @@
-# RaagHMM: Hidden Markov Model-based Raag Detection
+# 🎵 RaagHMM: Hidden Markov Model-based Raag Detection
 
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue)](https://python.org)
 [![License](https://img.shields.io/github/license/raaghmm/raag-hmm)](LICENSE)
 [![Build Status](https://github.com/raaghmm/raag-hmm/actions/workflows/test.yml/badge.svg)](https://github.com/raaghmm/raag-hmm/actions)
+[![Code Style](https://img.shields.io/badge/code%20style-black-black)](https://github.com/ambv/black)
 
-A Python library for automatic raag (raga) detection in Indian classical music using Hidden Markov Models with discrete emissions.
+> 🎶 **Indian Classical Music Meets Machine Learning**  
+> Advanced raag recognition using Hidden Markov Models for Hindustani music analysis
 
-## Table of Contents
+---
 
-- [Features](#features)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-- [Architecture](#architecture)
-- [API Reference](#api-reference)
-- [CLI Reference](#cli-reference)
-- [Development](#development)
-- [Testing](#testing)
-- [License](#license)
-- [Citation](#citation)
+## 🌟 Overview
 
-## Features
+**RaagHMM** is a state-of-the-art Python library designed for **automatic raag detection** in Indian classical music using **Hidden Markov Models** with discrete emissions. This system provides comprehensive tools for analyzing, training, and classifying musical pieces into the five fundamental ragas of Hindustani classical music.
 
-- **Multi-method pitch extraction**: Primary Praat-based extraction with librosa fallback
-- **Robust pitch smoothing**: Median filtering, Gaussian smoothing, gap filling, octave error correction
-- **Chromatic quantization**: 36-bin chromatic scale with tonic normalization
-- **Discrete HMM training**: Baum-Welch algorithm with numerical stability
-- **Comprehensive evaluation**: Accuracy metrics, confusion matrices, top-k analysis
-- **Rich CLI interface**: Easy-to-use command line tools with rich formatting
-- **Extensible architecture**: Modular design for adding new raag classes and features
+### 🎭 Featured Ragas
+- 🎼 **Bihag** - Late night serenity
+- 🎼 **Darbari** - Midnight depth 
+- 🎼 **Desh** - Evening romance
+- 🎼 **Gaud Malhar** - Rainy season melody
+- 🎼 **Yaman** - Evening tranquility
 
-## Installation
+---
 
-### Prerequisites
+## ✨ Key Features
 
-- Python 3.8+
-- pip
+### 🎚️ Multi-Method Pitch Extraction
+- **Primary**: Praat-based extraction for accuracy
+- **Fallback**: Librosa implementation for robustness
+- Adaptive voicing threshold with configurable parameters
 
-### Install from Source
+### 🎯 Advanced Signal Processing
+- **Median Filtering** for noise reduction
+- **Gaussian Smoothing** for continuity
+- **Gap Filling** for missing data
+- **Octave Error Correction** for accuracy
 
+### 📊 Discrete HMM Framework
+- **36-state** models with full connectivity
+- **Baum-Welch** training with numerical stability
+- **Regularization** and probability floor for robustness
+- **Forward-Backward** algorithm with scaling
+
+### 🧠 Comprehensive Evaluation
+- **Top-k** accuracy metrics (1, 3, 5)
+- **Confusion matrices** with detailed analysis
+- **Per-class** accuracy statistics
+- **Confidence** scoring with probabilistic outputs
+
+---
+
+## 🚀 Quick Start
+
+### Installation
 ```bash
 # Clone the repository
 git clone https://github.com/raaghmm/raag-hmm.git
@@ -51,142 +66,169 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -e .
 ```
 
-### Install in Development Mode
-
+### Development Installation
 ```bash
 # Install with development dependencies
-pip install -e ".[dev]"
-```
-
-## Quick Start
-
-### CLI Usage
-
-```bash
-# Prepare dataset
-raag-hmm dataset prepare /path/to/raw/dataset /path/to/processed/dataset
-
-# Train models
-raag-hmm train models /path/to/dataset /path/to/models
-
-# Classify single audio file
-raag-hmm predict single audio.wav /path/to/models --tonic 261.63
-
-# Evaluate models
-raag-hmm evaluate test /path/to/dataset /path/to/models /path/to/results
-```
-
-### Programmatic Usage
-
-```python
-from raag_hmm.train import RaagTrainer
-from raag_hmm.infer import RaagClassifier
-
-# Train models
-trainer = RaagTrainer()
-models = trainer.train_all_raag_models('path/to/dataset')
-
-# Classify audio
-classifier = RaagClassifier('path/to/models')
-result = classifier.predict_with_confidence(quantized_sequence)
-```
-
-## Architecture
-
-The RaagHMM system follows a modular architecture:
-
-```
-src/
-└── raag_hmm/                 # Main package
-    ├── __init__.py          # Package initialization
-    ├── config.py            # Configuration management
-    ├── logger.py            # Logging infrastructure
-    ├── exceptions.py        # Exception hierarchy
-    ├── cli/                 # Command-line interface
-    ├── evaluate/            # Performance evaluation
-    ├── hmm/                 # HMM implementation
-    ├── infer/               # Classification and inference
-    ├── io/                  # Audio I/O and dataset management
-    ├── pitch/               # Pitch extraction
-    ├── quantize/            # Chromatic quantization
-    └── train/               # Model training
-```
-
-## CLI Reference
-
-### Dataset Commands
-```bash
-raag-hmm dataset prepare <input> <output>      # Prepare dataset
-raag-hmm dataset extract-pitch <audio>         # Extract pitch from audio
-raag-hmm dataset validate <dataset>            # Validate dataset
-```
-
-### Training Commands
-```bash
-raag-hmm train models <dataset> <models>       # Train all models
-raag-hmm train single <raag> <dataset> <model> # Train single model
-```
-
-### Prediction Commands
-```bash
-raag-hmm predict single <audio> <models>       # Classify single audio
-raag-hmm predict batch <dir> <models> <out>    # Batch classification
-```
-
-### Evaluation Commands
-```bash
-raag-hmm evaluate test <dataset> <models> <out> # Evaluate test set
-raag-hmm evaluate compare <dataset> <models...> <out> # Compare models
-```
-
-## Development
-
-### Setting up Development Environment
-
-```bash
-# Fork and clone the repository
-git clone https://github.com/your-username/raag-hmm.git
-cd raag-hmm
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate
-
-# Install in development mode
 pip install -e ".[dev]"
 
 # Install pre-commit hooks
 pre-commit install
 ```
 
-### Code Style
+---
 
-- Python code follows PEP 8 standards
-- Code is formatted with Black
-- Type hints are required for public functions
-- Docstrings follow Google style
+## 🛠️ CLI Commands
 
-## Testing
+### Dataset Management
+```bash
+# Prepare dataset with validation
+raag-hmm dataset prepare /path/to/raw/dataset /path/to/processed
+
+# Extract pitch from audio
+raag-hmm dataset extract-pitch path/to/audio.wav
+
+# Validate dataset integrity
+raag-hmm dataset validate /path/to/dataset
+```
+
+### Model Training
+```bash
+# Train all raga models
+raag-hmm train models /path/to/dataset /path/to/models
+
+# Train single model
+raag-hmm train single Bihag /path/to/dataset bihag_model.pkl
+```
+
+### Prediction & Inference
+```bash
+# Single audio classification
+raag-hmm predict single audio.wav /path/to/models --tonic 261.63
+
+# Batch classification
+raag-hmm predict batch /path/to/audio/dir /path/to/models results.json
+```
+
+### Evaluation
+```bash
+# Test set evaluation
+raag-hmm evaluate test /path/to/dataset /path/to/models /path/to/results
+
+# Compare multiple model sets
+raag-hmm evaluate compare /path/to/dataset model1/ model2/ results/
+```
+
+---
+
+## 🏗️ Architecture
+
+```
+src/
+└── raag_hmm/                 # Main package
+    ├── 📁 cli/              # Command-line interface
+    ├── 📁 hmm/              # HMM implementation  
+    ├── 📁 train/            # Model training
+    ├── 📁 infer/            # Classification & inference
+    ├── 📁 io/               # Audio I/O & dataset management
+    ├── 📁 pitch/            # Pitch extraction & processing
+    ├── 📁 quantize/         # Chromatic quantization
+    ├── 📁 evaluate/         # Performance evaluation
+    ├── 📁 config.py         # Configuration system
+    └── 📁 logger.py         # Logging infrastructure
+```
+
+---
+
+## 🧪 Testing & Validation
 
 ```bash
 # Run all tests
 pytest
 
-# Run tests with coverage
+# Run with coverage
 pytest --cov=src/raag_hmm
 
-# Run specific test module
-pytest tests/test_module.py
-
-# Run integration tests only
-pytest -m integration
+# Run specific test suites
+pytest tests/unit/           # Unit tests
+pytest tests/integration/    # Integration tests
+pytest -m integration        # Filter by marker
 ```
 
-## License
+---
+
+## 🔧 Configuration
+
+The system provides flexible configuration through:
+
+### Default Configuration
+```python
+config = {
+    "audio": {
+        "sample_rate": 22050,
+        "channels": 1,
+        "supported_formats": ["wav", "flac", "mp3"]
+    },
+    "pitch": {
+        "frame_sec": 0.0464,
+        "hop_sec": 0.01,
+        "voicing_threshold": 0.5
+    },
+    "quantization": {
+        "n_bins": 36,
+        "base_midi": 48,  # C3
+        "reference_tonic": 261.63  # C4 in Hz
+    },
+    "hmm": {
+        "n_states": 36,
+        "n_observations": 36,
+        "max_iterations": 200,
+        "convergence_tolerance": 0.1
+    }
+}
+```
+
+---
+
+## 🎓 Academic & Research Applications
+
+### Use Cases
+- **Music Information Retrieval** research
+- **Cultural Heritage** preservation projects
+- **Automated Music** analysis systems
+- **Educational** tools for Indian classical music
+- **Ethnomusicology** studies
+
+### Research Extensions
+- Multi-artist raag classification
+- Tempo-invariant recognition
+- Cross-tradition (Carnatic/Hindustani) analysis
+- Real-time performance monitoring
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+### Development Setup
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Add tests for new functionality
+5. Run the test suite (`pytest`)
+6. Commit your changes (`git commit -m 'Add amazing feature'`)
+7. Push to the branch (`git push origin feature/amazing-feature`)
+8. Open a Pull Request
+
+---
+
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Citation
+---
+
+## 📚 Citation
 
 If you use RaagHMM in your research, please cite:
 
@@ -198,3 +240,21 @@ If you use RaagHMM in your research, please cite:
   url={https://github.com/raaghmm/raag-hmm}
 }
 ```
+
+---
+
+## 🆘 Support & Contact
+
+- 🐛 **Issues**: [GitHub Issues](https://github.com/raaghmm/raag-hmm/issues)
+- 📧 **Development Team**: dev@raaghmm.org
+- 📖 **Documentation**: [Read the Docs](https://raag-hmm.readthedocs.io/)
+
+---
+
+<p align="center">
+  <b>Made with ❤️ for Indian Classical Music</b>  
+</p>
+
+<p align="center">
+  <sub>The RaagHMM project is committed to preserving and advancing the understanding of Indian classical music through technology.</sub>
+</p>
