@@ -1,0 +1,10 @@
+{
+  "recording_id": "darbari_test_01",
+  "raag": "Darbari",
+  "tonic_hz": 220.0,
+  "artist": "Synthetic Artist - Darbari",
+  "instrument": "sitar",
+  "split": "test",
+  "duration_sec": 6.0,
+  "notes": "Synthetic Darbari raga audio for testing - Midnight raga, deep and serious"
+}

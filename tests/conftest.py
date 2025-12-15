@@ -1,97 +1,71 @@
 """
-Pytest configuration and shared fixtures for RaagHMM tests.
+Test configuration and fixtures for RaagHMM.
+
+This file contains pytest configuration and shared fixtures
+for testing the RaagHMM system.
 """
 
 import pytest
+import tempfile
 import numpy as np
 from pathlib import Path
-import tempfile
-import json
-
-from raag_hmm.config import reset_config
-
-
-@pytest.fixture(autouse=True)
-def reset_configuration():
-    """Reset configuration to defaults before each test."""
-    reset_config()
+from unittest.mock import Mock
 
 
 @pytest.fixture
 def temp_dir():
-    """Create a temporary directory for test files."""
+    """Create a temporary directory for testing."""
     with tempfile.TemporaryDirectory() as tmpdir:
         yield Path(tmpdir)
 
 
 @pytest.fixture
-def sample_audio_data():
-    """Generate sample audio data for testing."""
+def mock_audio_data():
+    """Create mock audio data for testing."""
+    # Create a simple sine wave at 440 Hz (A4)
     sr = 22050
-    duration = 1.0  # 1 second
+    duration = 2.0  # seconds
     t = np.linspace(0, duration, int(sr * duration))
-    # Simple sine wave at 440 Hz (A4)
-    audio = 0.5 * np.sin(2 * np.pi * 440 * t)
-    return audio, sr
+    frequency = 440.0
+    audio_data = np.sin(2 * np.pi * frequency * t)
+    return audio_data, sr
+
+
+@pytest.fixture
+def mock_pitch_data():
+    """Create mock pitch data for testing."""
+    # Create mock pitch array with some NaN values (unvoiced frames)
+    f0_hz = np.array([220.0, 246.9, 261.6, 293.7, 329.6, 349.2, 392.0, 440.0, 493.9, 523.2])
+    voicing_prob = np.array([0.9, 0.95, 0.8, 0.9, 0.85, 0.9, 0.8, 0.9, 0.85, 0.9])
+    
+    # Add some unvoiced frames (NaN in pitch)
+    f0_hz_with_nan = f0_hz.copy()
+    f0_hz_with_nan[2::3] = np.nan  # Every 3rd frame is unvoiced
+    
+    return f0_hz_with_nan, voicing_prob
 
 
 @pytest.fixture
 def sample_metadata():
-    """Generate sample metadata for testing."""
+    """Create sample metadata for testing."""
     return {
-        "recording_id": "test_001",
-        "raag": "Yaman",
-        "tonic_hz": 261.63,
-        "artist": "Test Artist",
-        "instrument": "Sitar",
-        "split": "train"
+        'recording_id': 'test_recording_001',
+        'raag': 'Bihag',
+        'tonic_hz': 261.63,
+        'artist': 'Test Artist',
+        'instrument': 'sitar',
+        'split': 'test'
     }
 
 
-@pytest.fixture
-def sample_pitch_sequence():
-    """Generate sample pitch sequence for testing."""
-    # Create a simple melodic pattern
-    frequencies = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25]  # C4 to C5
-    sequence = []
-    for freq in frequencies:
-        sequence.extend([freq] * 10)  # Hold each note for 10 frames
-    return np.array(sequence)
-
-
-@pytest.fixture
-def sample_quantized_sequence():
-    """Generate sample quantized sequence for testing."""
-    # Simple chromatic pattern: C4, C#4, D4, D#4, E4, F4, F#4, G4
-    return np.array([12, 13, 14, 15, 16, 17, 18, 19] * 5)  # Repeat pattern
-
-
-@pytest.fixture
-def mock_dataset_structure(temp_dir):
-    """Create a mock dataset structure for testing."""
-    dataset_dir = temp_dir / "dataset"
-    
-    # Create train and test directories
-    train_dir = dataset_dir / "train"
-    test_dir = dataset_dir / "test"
-    train_dir.mkdir(parents=True)
-    test_dir.mkdir(parents=True)
-    
-    # Create sample metadata files
-    raags = ["Yaman", "Bihag", "Darbari"]
-    
-    for split, split_dir in [("train", train_dir), ("test", test_dir)]:
-        for i, raag in enumerate(raags):
-            # Create metadata file
-            metadata = {
-                "recording_id": f"{split}_{raag}_{i:03d}",
-                "raag": raag,
-                "tonic_hz": 261.63 + i * 10,  # Vary tonic slightly
-                "split": split
-            }
-            
-            metadata_file = split_dir / f"{metadata['recording_id']}.json"
-            with open(metadata_file, 'w') as f:
-                json.dump(metadata, f)
-    
-    return dataset_dir
+def pytest_configure(config):
+    """Configure pytest."""
+    config.addinivalue_line(
+        "markers", "slow: marks tests as slow"
+    )
+    config.addinivalue_line(
+        "markers", "integration: marks tests as integration tests"
+    )
+    config.addinivalue_line(
+        "markers", "unit: marks tests as unit tests"
+    )

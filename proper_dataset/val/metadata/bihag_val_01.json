@@ -1,0 +1,10 @@
+{
+  "recording_id": "bihag_val_01",
+  "raag": "Bihag",
+  "tonic_hz": 261.63,
+  "artist": "Synthetic Artist - Bihag",
+  "instrument": "sitar",
+  "split": "val",
+  "duration_sec": 6.0,
+  "notes": "Synthetic Bihag raga audio for validation - Late night raga, serene and devotional"
+}

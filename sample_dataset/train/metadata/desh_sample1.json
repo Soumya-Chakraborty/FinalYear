@@ -1,0 +1,10 @@
+{
+  "recording_id": "desh_sample1",
+  "raag": "Desh",
+  "tonic_hz": 293.66,
+  "artist": "Test Artist",
+  "instrument": "tabla",
+  "split": "train",
+  "duration_sec": 95.2,
+  "notes": "Synthetic Desh sample for testing"
+}

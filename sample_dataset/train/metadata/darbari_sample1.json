@@ -1,0 +1,10 @@
+{
+  "recording_id": "darbari_sample1",
+  "raag": "Darbari",
+  "tonic_hz": 220.00,
+  "artist": "Test Artist",
+  "instrument": "vocal",
+  "split": "train",
+  "duration_sec": 150.0,
+  "notes": "Synthetic Darbari sample for testing"
+}

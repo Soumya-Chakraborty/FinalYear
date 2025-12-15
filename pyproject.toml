@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,16 +7,14 @@ name = "raag-hmm"
 version = "0.1.0"
 description = "Hidden Markov Model-based Raag Detection System for Indian Classical Music"
 readme = "README.md"
-requires-python = ">=3.8"
-license = {text = "MIT"}
 authors = [
-    {name = "RaagHMM Development Team", email = "dev@raaghmm.org"},
+    {name = "RaagHMM Development Team", email = "dev@raaghmm.org"}
 ]
-keywords = ["music", "raga", "hmm", "machine-learning", "audio-analysis"]
+license = {text = "MIT"}
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "Intended Audience :: Science/Research",
+    "Intended Audience :: Science/Research", 
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
@@ -27,83 +25,112 @@ classifiers = [
     "Topic :: Multimedia :: Sound/Audio :: Analysis",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
+requires-python = ">=3.8"
+dependencies = [
+    # Core scientific computing
+    "numpy>=1.21.0",
+    "scipy>=1.7.0",
+    # Audio processing
+    "librosa>=0.9.0",
+    "soundfile>=0.10.0",
+    "audioread>=2.1.9",
+    # Pitch extraction (Praat integration)
+    "praat-parselmouth>=0.4.0",
+    # Machine learning and HMM
+    "scikit-learn>=1.0.0",
+    "joblib>=1.1.0",
+    # CLI interface
+    "typer>=0.6.0",
+    "click>=8.0.0",
+    "rich>=12.0.0",
+    # Data handling and validation
+    "pydantic>=1.9.0",
+    "jsonschema>=4.0.0",
+    # Utilities
+    "tqdm>=4.64.0",
+    "pyyaml>=6.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=3.0.0",
+    "pytest-mock>=3.7.0",
+    "black>=22.0.0",
+    "flake8>=4.0.0",
+    "mypy>=0.950",
+    "pre-commit>=2.17.0"
+]
+docs = [
+    "sphinx>=4.5.0",
+    "sphinx-rtd-theme>=1.0.0",
+]
+jupyter = [
+    "jupyter>=1.0.0",
+    "matplotlib>=3.5.0",
+    "seaborn>=0.11.0",
+]
+
+[project.scripts]
+raag-hmm = "raag_hmm.cli.main:cli_main"
 
 [project.urls]
 Homepage = "https://github.com/raaghmm/raag-hmm"
-Documentation = "https://raag-hmm.readthedocs.io/"
-Repository = "https://github.com/raaghmm/raag-hmm.git"
-"Bug Tracker" = "https://github.com/raaghmm/raag-hmm/issues"
+Repository = "https://github.com/raaghmm/raag-hmm"
+Documentation = "https://raaghmm.readthedocs.io/"
+"Bug Reports" = "https://github.com/raaghmm/raag-hmm/issues"
 
-[project.scripts]
-raag-hmm = "raag_hmm.cli.main:app"
+[tool.setuptools]
+package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
-where = ["."]
+where = ["src"]
 include = ["raag_hmm*"]
 
 [tool.black]
 line-length = 88
 target-version = ['py38']
-include = '\.pyi?$'
-extend-exclude = '''
-/(
-  # directories
-  \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | build
-  | dist
-)/
-'''
+skip-string-normalization = true
 
 [tool.mypy]
 python_version = "3.8"
 warn_return_any = true
 warn_unused_configs = true
-disallow_untyped_defs = true
-disallow_incomplete_defs = true
-check_untyped_defs = true
-disallow_untyped_decorators = true
-no_implicit_optional = true
-warn_redundant_casts = true
 warn_unused_ignores = true
-warn_no_return = true
-warn_unreachable = true
-strict_equality = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
-minversion = "7.0"
-addopts = "-ra -q --strict-markers --strict-config"
-testpaths = [
-    "tests",
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "-ra",
+    "--tb=short"
 ]
 markers = [
-    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
-    "integration: marks tests as integration tests",
-    "unit: marks tests as unit tests",
+    "slow: marks tests as slow",
+    "integration: marks tests as integration tests"
 ]
 
 [tool.coverage.run]
-source = ["raag_hmm"]
+source = ["src"]
 omit = [
     "*/tests/*",
-    "*/test_*",
-    "setup.py",
+    "*/test_*.py",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/.venv/*"
 ]
 
 [tool.coverage.report]
 exclude_lines = [
     "pragma: no cover",
     "def __repr__",
-    "if self.debug:",
-    "if settings.DEBUG",
     "raise AssertionError",
     "raise NotImplementedError",
-    "if 0:",
-    "if __name__ == .__main__.:",
-    "class .*\\bProtocol\\):",
-    "@(abc\\.)?abstractmethod",
+    "if __name__ == .__main__.:"
 ]

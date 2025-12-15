@@ -1,0 +1,10 @@
+{
+  "recording_id": "bihag_train_03",
+  "raag": "Bihag",
+  "tonic_hz": 261.63,
+  "artist": "Synthetic Artist - Bihag",
+  "instrument": "sitar",
+  "split": "train",
+  "duration_sec": 8.0,
+  "notes": "Synthetic Bihag raga audio for training - Late night raga, serene and devotional"
+}

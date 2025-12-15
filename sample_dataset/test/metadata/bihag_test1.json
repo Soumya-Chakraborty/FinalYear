@@ -1,0 +1,10 @@
+{
+  "recording_id": "bihag_test1",
+  "raag": "Bihag",
+  "tonic_hz": 261.63,
+  "artist": "Test Artist",
+  "instrument": "sitar",
+  "split": "test",
+  "duration_sec": 115.7,
+  "notes": "Synthetic Bihag test sample"
+}

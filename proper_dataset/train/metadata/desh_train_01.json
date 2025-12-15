@@ -1,0 +1,10 @@
+{
+  "recording_id": "desh_train_01",
+  "raag": "Desh",
+  "tonic_hz": 293.66,
+  "artist": "Synthetic Artist - Desh",
+  "instrument": "sitar",
+  "split": "train",
+  "duration_sec": 8.0,
+  "notes": "Synthetic Desh raga audio for training - Evening raga, romantic and emotional"
+}

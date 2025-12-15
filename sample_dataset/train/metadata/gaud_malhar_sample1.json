@@ -1,0 +1,10 @@
+{
+  "recording_id": "gaud_malhar_sample1",
+  "raag": "Gaud_Malhar",
+  "tonic_hz": 196.00,
+  "artist": "Test Artist",
+  "instrument": "flute",
+  "split": "train",
+  "duration_sec": 130.8,
+  "notes": "Synthetic Gaud Malhar sample for testing"
+}

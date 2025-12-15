@@ -1,0 +1,10 @@
+{
+  "recording_id": "darbari_train_03",
+  "raag": "Darbari",
+  "tonic_hz": 220.0,
+  "artist": "Synthetic Artist - Darbari",
+  "instrument": "sitar",
+  "split": "train",
+  "duration_sec": 8.0,
+  "notes": "Synthetic Darbari raga audio for training - Midnight raga, deep and serious"
+}
